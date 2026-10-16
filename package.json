@@ -1,0 +1,27 @@
+{
+  "name": "zmidata-pe-vision",
+  "private": true,
+  "version": "0.4.1",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/recognition.test.mjs test/text-inspection.test.mjs",
+    "test:browser": "node test/recognition-browser.mjs",
+    "package": "node build.mjs"
+  },
+  "devDependencies": {
+    "jszip": "3.10.1"
+  },
+  "author": "zmidata.卓觅数据",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aswoshin/zmidata-pe-vision.git"
+  },
+  "homepage": "https://github.com/aswoshin/zmidata-pe-vision",
+  "bugs": {
+    "url": "https://github.com/aswoshin/zmidata-pe-vision/issues"
+  }
+}

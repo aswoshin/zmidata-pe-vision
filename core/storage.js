@@ -1,0 +1,6 @@
+let connection;
+async function db(){if(!connection)connection=new Promise((resolve,reject)=>{const r=indexedDB.open('pe-frame-review',1);r.onupgradeneeded=()=>{for(const name of ['results','cache'])r.result.createObjectStore(name,{keyPath:'key'});};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});return connection;}
+export async function get(store,key){const d=await db();return new Promise((resolve,reject)=>{const r=d.transaction(store).objectStore(store).get(key);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});}
+export async function put(store,value){const d=await db();return new Promise((resolve,reject)=>{const tx=d.transaction(store,'readwrite');tx.objectStore(store).put(value);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);});}
+export async function all(store){const d=await db();return new Promise((resolve,reject)=>{const r=d.transaction(store).objectStore(store).getAll();r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});}
+export async function clearAll(){const d=await db();return new Promise((resolve,reject)=>{const tx=d.transaction(['results','cache'],'readwrite');tx.objectStore('results').clear();tx.objectStore('cache').clear();tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);});}

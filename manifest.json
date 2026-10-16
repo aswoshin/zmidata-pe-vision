@@ -1,0 +1,64 @@
+{
+  "manifest_version": 3,
+  "name": "卓觅识界 · PE 视觉助手",
+  "version": "0.4.1",
+  "description": "双模式 PE 视觉助手：识别具体 IP、品牌与角色，或检查画面文字完整度、乱码和正确性；按进度抽帧，结果显示在评分下方。",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "storage",
+    "unlimitedStorage"
+  ],
+  "host_permissions": [
+    "https://api.siliconflow.cn/*",
+    "https://api.gpt.ge/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "卓觅识界 · 模型设置",
+    "default_popup": "panel/settings.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.skyvendorise.com/corpora/labeling/sdk*",
+        "https://skyvendorise.com/corpora/labeling/sdk*"
+      ],
+      "js": [
+        "content/workbench.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "panel/index.html",
+        "panel/*",
+        "core/*"
+      ],
+      "matches": [
+        "https://www.skyvendorise.com/*",
+        "https://skyvendorise.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "author": "zmidata.卓觅数据",
+  "short_name": "卓觅识界",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}
